@@ -1,0 +1,10 @@
+<!doctype html>
+<title>Hello from Flask</title>
+
+<h1>Hello from the JCC Web App!</h1>
+
+<ul id="navigation">
+   {% for e in tEvents %}
+   <li>{{e.name}} - {{e.date}}</li>
+   {% endfor %}
+</ul>
