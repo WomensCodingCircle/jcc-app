@@ -1,0 +1,22 @@
+
+
+{% extends "bootstrap/base.html" %}
+{% block title %}JCC App{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+  <h1>Hello, JCC Web App!!!</h1>
+
+<select class="selectpicker">
+   {% for e in tEvents %}
+   <option>{{e.name}}</option>
+   {% endfor %}
+</select>
+
+{% endblock %}
+
