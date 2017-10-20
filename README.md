@@ -28,7 +28,7 @@ If you get an error with the itsdangerous package, type
 and just install the requirements textfile again. If the installation runs
 successfully, you should be able to start the application with
 
-`python src/home.py`
+`python run.py`
 
 Now just open the URL which is printed out after 'Running on..' in a browser
 and you'll see your Flask app there!
