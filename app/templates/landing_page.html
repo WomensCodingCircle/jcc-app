@@ -1,10 +1,18 @@
-<!doctype html>
-<title>Hello from Flask</title>
 
-<h1>Hello from the JCC Web App!</h1>
 
-<ul id="navigation">
-   {% for e in tEvents %}
+{% extends "bootstrap/base.html" %}
+{% block title %}This is an example page{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+  <h1>Hello, JCC Web App!!!</h1>
+  {% for e in tEvents %}
    <li>{{e.name}} - {{e.date}}</li>
    {% endfor %}
-</ul>
+{% endblock %}
+
