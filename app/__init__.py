@@ -1,9 +1,12 @@
 from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
 from mixer.backend.flask import mixer
+
 
 app = Flask(__name__)
 app.jinja_env.auto_reload = True
 app.config.from_object('config')
+Bootstrap(app)
 
 @app.route('/')
 def landing_page():
