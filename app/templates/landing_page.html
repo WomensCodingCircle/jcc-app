@@ -10,13 +10,26 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Hello, JCC Web App!!!</h1>
 
-<select class="selectpicker">
-   {% for e in tEvents %}
-   <option>{{e.name}}</option>
-   {% endfor %}
-</select>
+<div class="container">
+   <div class="row">
+      <h1>Hello, JCC Web App!!!</h1>
+   </div>
+
+   <div class="row">
+      <select class="selectpicker">
+      {% for e in tEvents %}
+      <option>{{e.name}}</option>
+      {% endfor %}
+      </select>
+      <select class="selectpicker">
+         {% for e in tEvents %}
+         <option>{{e.name}}</option>
+         {% endfor %}
+      </select>
+   </div>
+</div>
+
 
 {% endblock %}
 

@@ -15,4 +15,4 @@ def landing_page():
 from app.models import Event
 
 with app.app_context():
-   events = mixer.cycle(4).blend(Event, name=(n for n in ('Back to School', 'Renovating', 'Race to end Poverty')))
+   events = mixer.cycle(4).blend(Event, name=(n for n in ('Back to School', 'Renovating', 'Race to end Poverty', 'Holiday Food Drive')))
