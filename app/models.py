@@ -32,10 +32,8 @@ class User(db.Model):
 class Contact(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    name =  db.Column(db.String(150), unique = True, nullable=False)
-   address =  db.Column(db.String(564), default='Street ')
-   birthday = db.Column(db.Date)
-   personal_phone = db.Column(db.String(20))
-   personal_cellphone = db.Column(db.String(20))
+   email = db.Column(db.String(120), unique=True, nullable=False)
+   employeeID=db.Column(db.Integer)
 
    def __repr__(self):
       return self.name

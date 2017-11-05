@@ -15,18 +15,35 @@
    <div class="row">
       <h1>Hello, JCC Web App!!!</h1>
    </div>
-
+   <br />
    <div class="row">
-      <select class="selectpicker">
+      <select class="form-control" style="width: 25%; float: left; margin-right: 2em;">
       {% for e in tEvents %}
-      <option>{{e.name}}</option>
+         <option>{{e.name}}</option>
       {% endfor %}
       </select>
-      <select class="selectpicker">
-         {% for e in tEvents %}
-         <option>{{e.name}}</option>
+      <select class="form-control" style="width: 25%; float: left; margin-right: 2em;">
+         {% for e in tPeople %}
+         <option>{{e.name}} --- {{e.email}} --- {{e.employeeId}}</option>
          {% endfor %}
       </select>
+      <input type="text" class="form-control" style="width: 25%; float: left; margin-right: 2em;"/>
+      <button type="button" class="btn btn-info">Save Donation</button>
+   </div>
+   <br />
+   <div class="row">
+      <table class="table">
+         <thead>
+            <tr>
+               <th>Name</th>
+               <th>Email</th>
+               <th>ID</th>
+               <th>Amount</th>
+            </tr>
+         </thead>
+         <tbody>
+         </tbody>
+      </table>
    </div>
 </div>
 
