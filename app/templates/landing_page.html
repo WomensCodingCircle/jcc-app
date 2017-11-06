@@ -17,18 +17,21 @@
    </div>
    <br />
    <div class="row">
-      <select class="form-control" style="width: 25%; float: left; margin-right: 2em;">
-      {% for e in tEvents %}
-         <option>{{e.name}}</option>
-      {% endfor %}
-      </select>
-      <select class="form-control" style="width: 25%; float: left; margin-right: 2em;">
-         {% for e in tPeople %}
-         <option>{{e.name}} --- {{e.email}} --- {{e.employeeId}}</option>
-         {% endfor %}
-      </select>
-      <input type="text" class="form-control" style="width: 25%; float: left; margin-right: 2em;"/>
-      <button type="button" class="btn btn-info">Save Donation</button>
+      <div class="form-group">
+         <select class="form-control" style="width: 25%; float: left; margin-right: 2em;">
+            {% for e in tEvents %}
+            <option>{{e.id}} -- {{e.name}}</option>
+            {% endfor %}
+         </select>
+         <select class="form-control" style="width: 25%; float: left; margin-right: 2em;">
+            {% for e in tPeople %}
+            <option>{{e.name}} --- {{e.email}} --- {{e.employeeId}}</option>
+            {% endfor %}
+         </select>
+         <input type="text" class="form-control" style="width: 25%; float: left; margin-right: 2em;"/>
+         <button type="button" class="btn btn-info">Save Donation</button>
+      </div>
+
    </div>
    <br />
    <div class="row">
@@ -42,6 +45,15 @@
             </tr>
          </thead>
          <tbody>
+            {% for d in tDonations %}
+               <tr>
+                  <td>{{d.personname}}</td>
+                  <td>{{d.email}}</td>
+                  <td>{{d.id}}</td>
+                  <td>{{d.amount}}</td>
+                  <td>{{d.event_id}}</td>
+               </tr>
+            {% endfor %}
          </tbody>
       </table>
    </div>

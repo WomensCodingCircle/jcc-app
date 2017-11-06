@@ -7,7 +7,7 @@ class Event(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    date = db.Column(db.Date)
    name = db.Column(db.String(150), unique = True, nullable=False)
-
+   donations = db.relationship('Donation', backref='event', lazy=True)
    def __repr__(self):
       return self.name
 
@@ -17,6 +17,8 @@ class Donation(db.Model):
    email = db.Column(db.String(120), unique=True, nullable=False)
    employeeID=db.Column(db.Integer)
    amount=db.Column(db.Float)
+   event_id = db.Column(db.Integer, db.ForeignKey('event.id'),
+                         nullable=False)
 
    def __repr__(self):
       return self.personname
