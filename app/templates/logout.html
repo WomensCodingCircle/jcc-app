@@ -1,0 +1,29 @@
+{% extends "bootstrap/base.html" %}
+{% block title %} My home page {% endblock %}
+{{block style%}
+{{super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="page">
+  <h1>My Blogging Site</h1>
+  <div class="metanav">
+  {% if session.username %}
+  Logged in as {{ session.username }}
+  {% endif %}
+  <a href="{{ url_for('index') }}">Home</a>
+  {% if not session.username %}
+    <a href="{{ url_for('register') }}">Register</a>
+    <a href="{{ url_for('login') }}">Login</a>
+  {% else %}
+   <!-- <a href="{{ url_for('profile', username=session.username) }}">Profile</a>-->
+    <a href="{{ url_for('logout') }}">Logout</a>
+  {% endif %}
+  </div>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block body %}{% endblock %}
+</div>
+{% endblock %}
