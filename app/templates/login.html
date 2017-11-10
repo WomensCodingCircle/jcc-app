@@ -1,13 +1,18 @@
+{% extends "logout.html" %}
 
-{% block body %}
-  <h2>Login</h2>
-	<form action="{{ url_for('login') }}" method="post">
-        <dl>
-            <dt>Username:</dt>
-            <dd><input type="text" name="username"></dd>
-            <dt>Password:</dt>
-            <dd><input type="password" name="password"></dd>
-        </dl>
-        <input type="submit" value="Login">
-	</form>
+{% block content %}
+<div class="container">
+  <div class="content">
+    <h2>Login</h2>
+      <form action="{{ url_for('login') }}" method="post">
+          <dl>
+              <dt>Username:</dt>
+              <dd><input type="text" name="username"></dd>
+              <dt>Password:</dt>
+              <dd><input type="password" name="password"></dd>
+          </dl>
+          <input type="submit" value="Login" class="btn btn-primary">
+      </form>
+  </div>
+</div>
 {% endblock %}

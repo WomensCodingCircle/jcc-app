@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask import render_template, request, session, redirect, url_for, flash
 from mixer.backend.flask import mixer
 from app.models import User
 from .models import app
@@ -21,8 +21,9 @@ def register():
       username=request.form['username']
       password=request.form['password']
       session['username']=username
-      flash('Logged in ')
-      return redirect(url_for('landing_page'))
+      flash('Logged i as username ')
+      flash('seccuessssss')
+      return redirect(url_for('login'))
    return render_template('register.html')
 
 @app.route('/login/', methods=["GET", "POST"])
@@ -31,11 +32,18 @@ def login():
       username = request.form['username']
       password = request.form['password']
       user=User.query.filter_by(username=username).first()
-      if user.username==username:
-         return user.password
+      flash('Logged in ')
+      try:
+         if user.username==username:
+            return redirect(url_for("admin.index"))
+      except Exception:
+         pass
    return render_template("login.html")
 
-
-
+@app.route('/logout/')
+def logout():
+   session.pop('username', None)
+   # flash("logged out")
+   return render_template("logout.html")
 
 
