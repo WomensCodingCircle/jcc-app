@@ -5,6 +5,7 @@ from .models import app
 
 @app.route('/')
 def landing_page():
+   events = Event.query.all()
    return render_template('landing_page.html', tEvents=events, tPeople='', tDonations=donations)
 
 @app.route('/about')
@@ -50,10 +51,7 @@ def logout():
 from app.models import Event, Donation
 
 with app.app_context():
-   events = mixer.cycle(4).blend(Event,
-                                    id=(n for n in (1,2,3,4)),
-                                    name=(n for n in ('Back to School', 'Renovating', 'Race to end Poverty', 'Holiday Food Drive'))
-                                 )
+
 #    people = mixer.cycle(4).blend(Contact,
 #                                     name=(n for n in ('Alice', 'Bob', 'Claudine', 'Dan')),
 #                                     employeeId=(n for n in ('12345', '67891', '45678', '12356')),
