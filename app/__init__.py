@@ -6,13 +6,22 @@ from .models import app
 
 @app.route('/')
 def landing_page():
-   return render_template('landing_page.html', tEvents=events)
+   return render_template('landing_page.html', tEvents=events, tPeople='', tDonations=donations)
 
-from app.models import Event
+@app.route('/about')
+def about():
+   text = 'This application has been build by the womens coding circle at Janelia'
+   return render_template('about.html')
+
+@app.route('/event/<event_id>')
+def show_donations(event_id):
+   print(event_id)
+   return render_template('landing_page.html')
+
+from app.models import Event, Donation
 
 with app.app_context():
    events = mixer.cycle(4).blend(Event, name=(n for n in ('Back to School', 'Renovating', 'Race to end Poverty')))
-
 
 
 @app.route('/register/', methods=["GET", "POST"])
@@ -46,4 +55,22 @@ def logout():
    # flash("logged out")
    return render_template("logout.html")
 
+with app.app_context():
+   events = mixer.cycle(4).blend(Event,
+                                    id=(n for n in (1,2,3,4)),
+                                    name=(n for n in ('Back to School', 'Renovating', 'Race to end Poverty', 'Holiday Food Drive'))
+                                 )
+   # people = mixer.cycle(4).blend(Contact,
+   #                                  name=(n for n in ('Alice', 'Bob', 'Claudine', 'Dan')),
+   #                                  employeeId=(n for n in ('12345', '67891', '45678', '12356')),
+   #                                  email=(n for n in ('alice@email.com', 'bob@email.com', 'claudine@email.com', 'dan@email.com'))
+   #                               )
 
+   donations = mixer.cycle(2).blend(Donation,
+                                    id=(n for n in (1,2,3,4)),
+                                    personname=(n for n in ('Alice','Bob')),
+                                    employeeId=(n for n in ('12345', '67891')),
+                                    email=(n for n in ('alice@email.com', 'bob@email.com')),
+                                    amount=(n for n in (30, 40)),
+                                    event_id=(n for n in (3, 4))
+                                 )
