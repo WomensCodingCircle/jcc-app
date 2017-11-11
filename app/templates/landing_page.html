@@ -14,10 +14,14 @@
       </div>
       <br />
       <div class="row">
-         <div class="form-group">
-            <select class="form-control" style="width: 25%; float: left; margin-right: 2em;">
+         <form class="form-group" action="{{ url_for('show_donations', event_id=value) }}" method="get">
+            <select class="form-control" onchange="window.location= '/event/' + this.value" style="width: 25%; float: left; margin-right: 2em;">
                {% for e in tEvents %}
-               <option>{{e.name}}</option>
+               {% if tEvent_id == e.id %}
+                     <option value="{{e.id}}" selected>{{e.name}}</option>
+               {% else %}
+                     <option value="{{e.id}}">{{e.name}}</option>
+               {% endif %}
                {% endfor %}
             </select>
             <select class="form-control" style="width: 25%; float: left; margin-right: 2em;">
@@ -27,25 +31,28 @@
             </select>
             <input type="text" class="form-control" style="width: 25%; float: left; margin-right: 2em;"/>
             <button type="button" class="btn btn-info">Save Donation</button>
-        </div>
+         </form>
       </div>
       <br />
       <div class="row">
          <table class="table">
             <thead>
                <tr>
+                  <th>ID</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>ID</th>
+                  <th>Employee ID</th>
                   <th>Amount</th>
+                  <th>Event ID</th>
                </tr>
             </thead>
             <tbody>
                {% for d in tDonations %}
                   <tr>
+                     <td>{{d.id}}</td>
                      <td>{{d.personname}}</td>
                      <td>{{d.email}}</td>
-                     <td>{{d.id}}</td>
+                     <td>{{d.employeeID}}</td>
                      <td>{{d.amount}}</td>
                      <td>{{d.event_id}}</td>
                   </tr>
