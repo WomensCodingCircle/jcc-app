@@ -6,9 +6,13 @@ from .models import app
 @app.route('/')
 def landing_page():
    events = Event.query.all()
-   event_id = Event.query.first().id
-   donations = Donation.query.filter_by(event_id=event_id)
-   return render_template('landing_page.html', tEvents=events, tPeople='', tDonations=donations, tEvent_id=None)
+   first = Event.query.first()
+   donations = []
+   event_id = None
+   if (first):
+      event_id = first.id
+      donations = Donation.query.filter_by(event_id=event_id)
+   return render_template('landing_page.html', tEvents=events, tPeople='', tDonations=donations, tEvent_id=event_id)
 
 @app.route('/event/<event_id>')
 def show_donations(event_id):
