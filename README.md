@@ -26,7 +26,15 @@ If you get an error with the itsdangerous package, type
 `pip install git+https://github.com/pallets/itsdangerous.git@master\##egg\=itsdangerous`
 
 and just install the requirements textfile again. If the installation runs
-successfully, you should be able to start the application with
+successfully, you need to run a database migration. Set the FLASK_APP environment variable with
+
+`export FLASK_APP=app/__init__.py`
+
+Then run the database migration with
+
+flask db upgrade
+
+If that worked out, you should be able to start the application with
 
 `python run.py`
 
