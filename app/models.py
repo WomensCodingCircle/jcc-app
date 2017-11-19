@@ -1,18 +1,5 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-from flask_bootstrap import Bootstrap
-from flask_migrate import Migrate
-
-app = Flask(__name__)
-app.jinja_env.auto_reload = True
-app.config.from_object('config')
-Bootstrap(app)
-
-db = SQLAlchemy(app)
-admin=Admin(app)
-migrate = Migrate(app,db)
+from app import db, admin
 
 class Event(db.Model):
    id = db.Column(db.Integer, primary_key=True)
