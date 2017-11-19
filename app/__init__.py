@@ -1,7 +1,18 @@
-from flask import render_template, request, session, redirect, url_for, flash
-from mixer.backend.flask import mixer
-from app.models import User
-from .models import app
+from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask_bootstrap import Bootstrap
+from flask_sqlalchemy import SQLAlchemy
+from flask_admin import Admin
+from flask_migrate import Migrate
+
+app = Flask(__name__)
+app.jinja_env.auto_reload = True
+app.config.from_object('config')
+Bootstrap(app)
+db = SQLAlchemy(app)
+admin=Admin(app)
+migrate = Migrate(app,db)
+
+from app.models import User, Event, Donation
 
 @app.route('/')
 def landing_page():
@@ -57,4 +68,3 @@ def logout():
    # flash("logged out")
    return render_template("logout.html")
 
-from app.models import Event, Donation
