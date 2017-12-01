@@ -1,35 +1,65 @@
-
-
 {% extends "bootstrap/base.html" %}
 {% block title %}JCC App{% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-fixed-top">
-  <!-- ... -->
-</div>
+   <div class="navbar navbar-fixed-top">
+     <!-- ... -->
+   </div>
 {% endblock %}
 
 {% block content %}
-
-<div class="container">
-   <div class="row">
-      <h1>Hello, JCC Web App!!!</h1>
+   <div class="container">
+      <div class="row">
+         <h1>Hello, JCC Web App!</h1>
+      </div>
+      <br />
+      <div class="row">
+         <form class="form-group" action="{{ url_for('show_donations', event_id=value) }}" method="get">
+            <select class="form-control" onchange="window.location= '/event/' + this.value" style="width: 25%; float: left; margin-right: 2em;">
+               {% for e in tEvents %}
+               {% if tEvent_id == e.id %}
+                     <option value="{{e.id}}" selected>{{e.name}}</option>
+               {% else %}
+                     <option value="{{e.id}}">{{e.name}}</option>
+               {% endif %}
+               {% endfor %}
+            </select>
+            <select class="form-control" style="width: 25%; float: left; margin-right: 2em;">
+               {% for e in tPeople %}
+               <option>{{e.name}} --- {{e.email}} --- {{e.employeeId}}</option>
+               {% endfor %}
+            </select>
+            <input type="text" class="form-control" style="width: 25%; float: left; margin-right: 2em;"/>
+            <button type="button" class="btn btn-info">Save Donation</button>
+         </form>
+      </div>
+      <br />
+      <div class="row">
+         <table class="table">
+            <thead>
+               <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Employee ID</th>
+                  <th>Amount</th>
+                  <th>Event ID</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for d in tDonations %}
+                  <tr>
+                     <td>{{d.id}}</td>
+                     <td>{{d.personname}}</td>
+                     <td>{{d.email}}</td>
+                     <td>{{d.employeeID}}</td>
+                     <td>{{d.amount}}</td>
+                     <td>{{d.event_id}}</td>
+                  </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
    </div>
-
-   <div class="row">
-      <select class="selectpicker">
-      {% for e in tEvents %}
-      <option>{{e.name}}</option>
-      {% endfor %}
-      </select>
-      <select class="selectpicker">
-         {% for e in tEvents %}
-         <option>{{e.name}}</option>
-         {% endfor %}
-      </select>
-   </div>
-</div>
-
-
 {% endblock %}
 
