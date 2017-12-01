@@ -15,22 +15,36 @@
       <br />
       <div class="row">
          <div class="form-group">
-            <select class="form-control" style="width: 25%; float: left; margin-right: 2em;">
-               {% for e in tEvents %}
-               <option>{{e.id}} -- {{e.name}}</option>
-               {% endfor %}
-            </select>
-            <select class="form-control" style="width: 25%; float: left; margin-right: 2em;">
-               {% for e in tPeople %}
-               <option>{{e.name}} --- {{e.email}} --- {{e.employeeId}}</option>
-               {% endfor %}
-            </select>
-            <input type="text" class="form-control" style="width: 25%; float: left; margin-right: 2em;"/>
-            <button type="button" class="btn btn-info">Save Donation</button>
+            <div class="col-lg-3">
+                  <label>Event</label>
+                  <div>
+                     <select class="form-control" style="margin-right: 2em;">
+                        {% for e in tEvents %}
+                        <option>{{e.id}} -- {{e.name}}</option>
+                        {% endfor %}
+                     </select>
+                  </div>
+            </div>
+            <div class="col-lg-3">
+               <label>Person</label>
+               <select class="form-control" style="margin-right: 2em;">
+                  {% for e in tPeople %}
+                  <option>{{e.name}} --- {{e.email}} --- {{e.employeeId}}</option>
+                  {% endfor %}
+               </select>
+            </div>
+            <div class="col-lg-3">
+               <label>Amount</label>
+               <input type="text" class="form-control" style="margin-right: 2em;"/>
+            </div>
+            <div class="col-lg-3">
+               <button type="button" class="btn btn-info">Save Donation</button>
+            </div>
         </div>
       </div>
       <br />
       <div class="row">
+         <h4>Donations</h4>
          <table class="table">
             <thead>
                <tr>
