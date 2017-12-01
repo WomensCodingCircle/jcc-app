@@ -48,18 +48,21 @@
          <table class="table">
             <thead>
                <tr>
+                  <th>ID</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>ID</th>
+                  <th>Employee ID</th>
                   <th>Amount</th>
+                  <th>Event ID</th>
                </tr>
             </thead>
             <tbody>
                {% for d in tDonations %}
                   <tr>
+                     <td>{{d.id}}</td>
                      <td>{{d.personname}}</td>
                      <td>{{d.email}}</td>
-                     <td>{{d.id}}</td>
+                     <td>{{d.employeeID}}</td>
                      <td>{{d.amount}}</td>
                      <td>{{d.event_id}}</td>
                   </tr>

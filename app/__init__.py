@@ -1,20 +1,41 @@
-from flask import render_template, request, session, redirect, url_for, flash
-from mixer.backend.flask import mixer
-from app.models import User
-from .models import app
+from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask_bootstrap import Bootstrap
+from flask_sqlalchemy import SQLAlchemy
+from flask_admin import Admin
+from flask_migrate import Migrate
+
+app = Flask(__name__)
+app.jinja_env.auto_reload = True
+app.config.from_object('config')
+Bootstrap(app)
+db = SQLAlchemy(app)
+admin=Admin(app)
+migrate = Migrate(app,db)
+
+from app.models import User, Event, Donation
 
 @app.route('/')
 def landing_page():
-   return render_template('landing_page.html', tEvents=events, tPeople='', tDonations=donations)
-
-@app.route('/about')
-def about():
-   return render_template('about.html')
+   events = Event.query.all()
+   first = Event.query.first()
+   donations = []
+   event_id = None
+   if (first):
+      event_id = first.id
+      donations = Donation.query.filter_by(event_id=event_id)
+   return render_template('landing_page.html', tEvents=events, tPeople='', tDonations=donations, tEvent_id=event_id)
 
 @app.route('/event/<event_id>')
 def show_donations(event_id):
    print(event_id)
-   return render_template('landing_page.html')
+   events = Event.query.all()
+   donations = Donation.query.filter_by(event_id=event_id)
+   print(donations)
+   return render_template('landing_page.html', tEvents=events, tDonations=donations, tEvent_id=int(event_id))
+
+@app.route('/about')
+def about():
+   return render_template('about.html')
 
 @app.route('/register/', methods=["GET", "POST"])
 def register():
@@ -47,24 +68,3 @@ def logout():
    # flash("logged out")
    return render_template("logout.html")
 
-from app.models import Event, Donation
-
-with app.app_context():
-   events = mixer.cycle(4).blend(Event,
-                                    id=(n for n in (1,2,3,4)),
-                                    name=(n for n in ('Back to School', 'Renovating', 'Race to end Poverty', 'Holiday Food Drive'))
-                                 )
-#    people = mixer.cycle(4).blend(Contact,
-#                                     name=(n for n in ('Alice', 'Bob', 'Claudine', 'Dan')),
-#                                     employeeId=(n for n in ('12345', '67891', '45678', '12356')),
-#                                     email=(n for n in ('alice@email.com', 'bob@email.com', 'claudine@email.com', 'dan@email.com'))
-#                                  )
-
-   donations = mixer.cycle(2).blend(Donation,
-                                       id=(n for n in (1,2,3,4)),
-                                       personname=(n for n in ('Alice','Bob')),
-                                       employeeId=(n for n in ('12345', '67891')),
-                                       email=(n for n in ('alice@email.com', 'bob@email.com')),
-                                       amount=(n for n in (30, 40)),
-                                       event_id=(n for n in (3, 4))
-                                    )
