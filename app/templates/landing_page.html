@@ -18,7 +18,7 @@
             <div class="col-lg-3">
                <label>Event</label>
                <div>
-                  <select class="form-control" onchange="window.location= '/event/' + this.value" style="margin-right: 2em;">
+                  <select class="form-control" onchange="window.location = jcc.myRoot + 'event/' + this.value" style="margin-right: 2em;">
                      {% for e in tEvents %}
                      {% if tEvent_id == e.id %}
                      <option value="{{e.id}}" selected>{{e.name}}</option>
@@ -77,5 +77,9 @@
          </table>
       </div>
    </div>
+   <script>
+      var jcc = jcc || {};
+      jcc.myRoot = "{{ url_for('landing_page')}}";
+   </script>
 {% endblock %}
 
