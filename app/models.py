@@ -30,7 +30,7 @@ class User(db.Model):
       return self.username
 
 class Eventview(ModelView):
-   form_columns = ["id", "date", "name"]
+   form_columns = ["date", "name"]
 
 admin.add_view(ModelView(User, db.session))
 admin.add_view(Eventview(Event, db.session))
