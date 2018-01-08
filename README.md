@@ -32,7 +32,7 @@ successfully, you need to run a database migration. Set the FLASK_APP environmen
 
 Then run the database migration with
 
-flask db upgrade
+`flask db upgrade`
 
 If that worked out, you should be able to start the application with
 
@@ -40,3 +40,11 @@ If that worked out, you should be able to start the application with
 
 Now just open the URL which is printed out after 'Running on..' in a browser
 and you'll see your Flask app there!
+
+#### Migrate database after changes to the model
+
+If you change the data model of the application, you need to run the database migration again.
+
+`flask db upgrade`
+
+should to the trick, given that your FLASK_APP environment variable is still set (see above).
