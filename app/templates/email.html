@@ -1,0 +1,55 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}JCC App{% endblock %}
+
+{% block navbar %}
+   <div class="navbar navbar-fixed-top">
+     <!-- ... -->
+   </div>
+{% endblock %}
+
+{% block content %}
+   <div class="container">
+      <div class="row">
+         <h3>Send Email</h3>
+      </div>
+      <br />
+      <div class="col-lg-12">
+         <div class="row">
+            <form class="form-group">
+               <label>From</label>
+               <input type="text" class="form-control" />
+            </form>
+         </div>
+         <div class="row">
+            <form class="form-group">
+               <label>To</label>
+               <input type="text" class="form-control" />
+            </form>
+         </div>
+         <div class="row">
+            <form class="form-group">
+               <label>CC</label>
+               <input type="text" class="form-control" />
+            </form>
+         </div>
+         <div class="row">
+            <form class="form-group">
+               <label>Subject</label>
+               <input type="text" class="form-control" />
+            </form>
+         </div>
+         <br /><br />
+         <div class="row">
+            <form class="form-group">
+               <label>Message</label>
+               <input type="text" class="form-control"  style="height: 20em;"/>
+            </form>
+         </div>
+      </div>
+   </div>
+   <script>
+      var jcc = jcc || {};
+      jcc.myRoot = "{{ url_for('landing_page')}}";
+   </script>
+{% endblock %}
+
