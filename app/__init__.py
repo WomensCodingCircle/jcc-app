@@ -68,3 +68,11 @@ def logout():
    # flash("logged out")
    return render_template("logout.html")
 
+@app.route('/mail/')
+def generate_email_default():
+   return render_template("email.html")
+
+@app.route('/mail/event/<event_id>/template/<template_id>')
+def generate_email(event_id, template_id):
+   # TODO: Query for the event with given event_id and for the template and generate email message and values for From, To, CC field
+   return render_template("email.html")
