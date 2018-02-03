@@ -10,7 +10,7 @@
 {% block content %}
    <div class="container">
       <div class="row">
-         <h3>Send Email</h3>
+         <h3>{{ tTitle }}</h3>
       </div>
       <br />
       <div class="col-lg-12">
@@ -46,10 +46,21 @@
             </form>
          </div>
       </div>
+      <div class="row" style="text-align: right;">
+         <button type="button" class="btn btn-info" style="margin-top: 1.8em;"
+                 onclick="sendEmail()" >Send Email</button>
+      </div>
    </div>
    <script>
       var jcc = jcc || {};
       jcc.myRoot = "{{ url_for('landing_page')}}";
+
+      var sendEmail = function(){
+         var choice = confirm('Do you really want to send this email out?');
+         if (choice) {
+            // TODO: Send email
+         }
+      }
    </script>
 {% endblock %}
 
