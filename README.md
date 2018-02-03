@@ -48,3 +48,19 @@ If you change the data model of the application, you need to run the database mi
 `flask db upgrade`
 
 should to the trick, given that your FLASK_APP environment variable is still set (see above).
+
+### Update the application on our VM
+
+Log into the VM and find the app under
+
+`/var/www/projects/jcc-app`
+
+Get the latest version of the app from Github:
+
+`git fetch`
+
+`git rebase origin/master`
+
+Reload the service for the app:
+
+`sudo systemctl restart jcc-app`
