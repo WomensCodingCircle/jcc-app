@@ -70,7 +70,7 @@ def logout():
 
 @app.route('/mail/')
 def generate_email_default():
-   return render_template("email.html")
+   return render_template("email.html", tTitle = 'Sample email template')
 
 @app.route('/mail/event/<event_id>/template/<template_id>')
 def generate_email(event_id, template_id):
