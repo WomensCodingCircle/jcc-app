@@ -1,11 +1,20 @@
 from flask_admin.contrib.sqla import ModelView
 from app import db, admin
 
+class Initiative(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(150), unique = True, nullable = False)
+   events = db.relationship('Event', backref='initiative', lazy = True)
+   def __repr__(self):
+      return self.name
+
 class Event(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    date = db.Column(db.Date)
    name = db.Column(db.String(150), unique = True, nullable=False)
    donations = db.relationship('Donation', backref='event', lazy=True)
+   initiative_id = db.Column(db.Integer, db.ForeignKey('initiative.id'),
+                              nullable=True)
    def __repr__(self):
       return self.name
 
@@ -17,10 +26,8 @@ class Donation(db.Model):
    amount=db.Column(db.Float)
    event_id = db.Column(db.Integer, db.ForeignKey('event.id'),
                          nullable=False)
-
    def __repr__(self):
       return self.personname
-
 
 class User(db.Model):
    id = db.Column(db.Integer, primary_key=True)
@@ -35,3 +42,4 @@ class Eventview(ModelView):
 admin.add_view(ModelView(User, db.session))
 admin.add_view(Eventview(Event, db.session))
 admin.add_view(ModelView(Donation, db.session))
+admin.add_view(ModelView(Initiative, db.session))
