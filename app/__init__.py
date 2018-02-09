@@ -3,6 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask_migrate import Migrate
+from flask_login import LoginManager
 
 app = Flask(__name__)
 app.jinja_env.auto_reload = True
@@ -11,6 +12,7 @@ Bootstrap(app)
 db = SQLAlchemy(app)
 admin=Admin(app)
 migrate = Migrate(app,db)
+login_manager = LoginManager()
 
 from app.models import User, Event, Donation
 

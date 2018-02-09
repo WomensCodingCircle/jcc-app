@@ -43,11 +43,18 @@ and you'll see your Flask app there!
 
 #### Migrate database after changes to the model
 
-If you change the data model of the application, you need to run the database migration again.
+If you changed the data model of the application, you need to run the database migration again. If you haven't done so already,
+set the FLASK_APP environment variable
+
+`export FLASK_APP=app/__init__.py`
+
+Create a migration:
+
+`flask db migrate`
+
+Apply the migration:
 
 `flask db upgrade`
-
-should to the trick, given that your FLASK_APP environment variable is still set (see above).
 
 ### Update the application on our VM
 
