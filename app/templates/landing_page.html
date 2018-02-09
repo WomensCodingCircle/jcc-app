@@ -89,7 +89,11 @@
 
       var generateEmail = function(templateId){
          var eventId = document.getElementById('event-box').value;
-         window.location = jcc.myRoot + 'mail/event/' + eventId + '/template/' + templateId;
+         if (eventId) {
+            window.location = jcc.myRoot + 'mail/event/' + eventId + '/template/' + templateId;
+         } else {
+            alert('Please select an event first.');
+         }
       }
    </script>
 {% endblock %}
