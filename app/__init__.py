@@ -14,7 +14,7 @@ admin=Admin(app)
 migrate = Migrate(app,db)
 login_manager = LoginManager()
 
-from app.models import User, Event, Donation
+from app.models import User, Event, Donation, EmailTemplate
 
 @app.route('/')
 def landing_page():
@@ -76,10 +76,7 @@ def generate_email_default():
 
 @app.route('/mail/event/<event_id>/template/<template_id>')
 def generate_email(event_id, template_id):
-   # TODO: Query for the event with given event_id and for the template and generate email message and values for From, To, CC field
    event = Event.query.filter_by(id=event_id)
-   if template_id == '1':
-         title = "Email to Donators"
-   else:
-         title = "Email to Finance"
-   return render_template("email.html", tTitle = title)
+   myTemplate = EmailTemplate.query.filter_by(id=template_id).first()
+   # TODO: Query for the event with given event_id and for the template and generate email message and values for From, To, CC field
+   return render_template("email.html", tTemplate=myTemplate)

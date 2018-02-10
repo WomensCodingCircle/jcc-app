@@ -10,39 +10,39 @@
 {% block content %}
    <div class="container">
       <div class="row">
-         <h3>{{ tTitle }}</h3>
+         <h3>{{ tTemplate.name }}</h3>
       </div>
       <br />
       <div class="col-lg-12">
          <div class="row">
             <form class="form-group">
                <label>From</label>
-               <input type="text" class="form-control" />
+               <input type="text" class="form-control" value="{{ tTemplate.sender }}" />
             </form>
          </div>
          <div class="row">
             <form class="form-group">
                <label>To</label>
-               <input type="text" class="form-control" />
+               <input type="text" class="form-control" value="{{ tTemplate.recipient }}" />
             </form>
          </div>
          <div class="row">
             <form class="form-group">
                <label>CC</label>
-               <input type="text" class="form-control" />
+               <input type="text" class="form-control" value="{{ tTemplate.cc }}" />
             </form>
          </div>
          <div class="row">
             <form class="form-group">
                <label>Subject</label>
-               <input type="text" class="form-control" />
+               <input type="text" class="form-control" value="{{ tTemplate.subject }} "/>
             </form>
          </div>
          <br /><br />
          <div class="row">
             <form class="form-group">
                <label>Message</label>
-               <input type="text" class="form-control"  style="height: 20em;"/>
+               <input type="text" class="form-control"  style="height: 20em;" value="{{ tTemplate.message }}" />
             </form>
          </div>
       </div>
