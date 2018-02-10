@@ -31,11 +31,14 @@ class Donation(db.Model):
 
 class EmailTemplate(db.Model):
    id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(150), unique = False, nullable=False)
    sender = db.Column(db.String(200), unique=False, nullable=False)
    recipient = db.Column(db.String(200), unique=False, nullable=False)
-   cc = db.Column(db.String(200), unique=False, nullable=False)
-   subject = db.Column(db.String(200), unique=False, nullable=False)
-   message = db.Column(db.String(10000), unique=False, nullable=False)
+   cc = db.Column(db.String(200), unique=False, nullable=True)
+   subject = db.Column(db.String(200), unique=False, nullable=True)
+   message = db.Column(db.String(10000), unique=False, nullable=True)
+   def __repr__(self):
+      return self.name
 
 class User(db.Model):
    id = db.Column(db.Integer, primary_key=True)
@@ -47,8 +50,11 @@ class User(db.Model):
 class Eventview(ModelView):
    form_columns = ["date", "name"]
 
+class TemplateView(ModelView):
+   form_columns = ["name", "sender", "recipient", "cc", "subject", "message"]
+
 admin.add_view(ModelView(User, db.session))
 admin.add_view(Eventview(Event, db.session))
 admin.add_view(ModelView(Donation, db.session))
 admin.add_view(ModelView(Initiative, db.session))
-admin.add_view(ModelView(EmailTemplate, db.session))
+admin.add_view(TemplateView(EmailTemplate, db.session))
