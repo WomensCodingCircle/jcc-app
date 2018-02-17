@@ -8,8 +8,8 @@
 {% block content %}
    <div class="container">
       <div class="row" style="text-align: right;">
-         <a href="/admin">Admin</a> |
-         <a href="/login">Logout</a>
+         <a href="{{ url_for('admin.index') }}">Admin</a> |
+         <a href="{{ url_for('login') }}">Logout</a>
       </div>
       <div class="row">
          <h1>Hello, JCC Web App!</h1>
