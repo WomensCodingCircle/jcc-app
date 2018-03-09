@@ -1,5 +1,10 @@
+app.db
 .idea
 env
 __pycache__/
 app/__pycache__/
-app.db
+app/__init__.pyc
+app/models.pyc
+config.pyc
+migrations/env.pyc
+migrations/versions/ea7f24c472a7_.pyc
