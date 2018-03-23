@@ -7,13 +7,7 @@
 
 {% block content %}
    <div class="container">
-      <div class="row" style="text-align: right;">
-         <a href="{{ url_for('admin.index') }}">Admin</a> |
-         <a href="{{ url_for('login') }}">Logout</a>
-      </div>
-      <div class="row">
-         <h1>Hello, JCC Web App!</h1>
-      </div>
+      {% include "heading.html" %}
       <br />
       <div class="row">
          <form class="form-group" action="{{ url_for('show_donations', event_id=value) }}" method="get">
