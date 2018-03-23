@@ -55,6 +55,10 @@ and you'll see your Flask app there!
 
 #### Migrate database after changes to the model
 
+A database migration is a script, which describes the changes to the schema of a data model. Right now, we are using the flask-migrate module to create database migrations:
+
+[https://flask-migrate.readthedocs.io/en/latest/](https://flask-migrate.readthedocs.io/en/latest/)
+
 If you changed the data model of the application, you need to run the database migration again. If you haven't done so already,
 set the FLASK_APP environment variable
 
@@ -89,7 +93,7 @@ $ git fetch
 $ git rebase origin/master
 ```
 
-Reload the service for the app:
+Restart the service for the app:
 
 ```bash
 $ sudo systemctl restart jcc-app
