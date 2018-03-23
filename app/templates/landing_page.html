@@ -17,6 +17,15 @@
       <br />
       <div class="row">
          <form class="form-group" action="{{ url_for('show_donations', event_id=value) }}" method="get">
+           <div class="col-lg-3">
+             <label>Initiative</label>
+             <div>
+               <select id="" class="form-control" onchange="" style="margin-right: 2em;">
+                 <!-- TODO #17: Add a loop to display all Initiative in the system, when selecting another initiative,
+                      change the route so the event dropdown is getting updated -->
+               </select>
+             </div>
+           </div>
             <div class="col-lg-3">
                <label>Event</label>
                <div>
@@ -31,21 +40,21 @@
                   </select>
                </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                <label>Person</label>
                <div>
-                  <select class="form-control" style="margin-right: 2em;">
+                  <select class="form-control" id="people-dropdown" style="margin-right: 2em;">
                      {% for e in tPeople %}
                      <option>{{e.name}} --- {{e.email}} --- {{e.employeeId}}</option>
                      {% endfor %}
                   </select>
                </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                <label>Amount in $</label>
                <input type="number" min="0.00" max="10000.00" step="0.01" class="form-control" style="margin-right: 2em;"/>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                <button type="button" class="btn btn-info" style="margin-top: 1.8em">Save Donation</button>
             </div>
          </form>
@@ -80,23 +89,37 @@
       </div>
       <div class="row" style="text-align: right;">
          <button type="button" class="btn btn-info" style="margin-top: 1.8em"
-                  onclick="generateEmail(1)" >Email to Donators</button>
+                  onclick="jcc.generateEmail(1)" >Email to Donators</button>
          <button type="button" class="btn btn-info" style="margin-top: 1.8em"
-                  onclick="generateEmail(2)" >Email to Finance</button>
+                  onclick="jcc.generateEmail(2)" >Email to Finance</button>
+        <button type="button" class="btn btn-info" style="margin-top: 1.8em"
+                onclick="jcc.exportToExcel()" >Export to Excel</button>
       </div>
    </div>
    <script>
       var jcc = jcc || {};
       jcc.myRoot = "{{ url_for('landing_page')}}";
 
-      var generateEmail = function(templateId){
+      jcc.generateEmail = function(templateId){
          var eventId = document.getElementById('event-box').value;
          if (eventId) {
             window.location = jcc.myRoot + 'mail/event/' + eventId + '/template/' + templateId;
          } else {
             alert('Please select an event first.');
          }
-      }
+      };
+
+      jcc.exportToExcel = function(){
+        alert('export to excel!');
+        // TODO #22 implement functionality that donations, which are displayed in the table (or all?) are exported to excel
+      };
+
+      document.onreadystatechange = () => {
+        if (document.readyState === 'complete') {
+           var peopleDropdown = document.getElementById("people-dropdown");
+           // TODO #11 Query the data and fill in values into the dropdown
+        }
+      };
    </script>
 {% endblock %}
 
