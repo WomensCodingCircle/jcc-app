@@ -1,4 +1,6 @@
 from flask_admin.contrib.sqla import ModelView
+from wtforms import TextAreaField
+from wtforms.widgets import TextArea
 from app import db, admin
 
 class Initiative(db.Model):
@@ -50,8 +52,23 @@ class User(db.Model):
 class Eventview(ModelView):
    form_columns = ["date", "name"]
 
+class CKTextAreaWidget(TextArea):
+   def __call__(self, field, **kwargs):
+      if kwargs.get('class'):
+         kwargs['class'] += ' ckeditor'
+      else:
+         kwargs.setdefault('class', 'ckeditor')
+      return super(CKTextAreaWidget, self).__call__(field, **kwargs)
+
+class CKTextAreaField(TextAreaField):
+   widget = CKTextAreaWidget()
+
 class TemplateView(ModelView):
+   extra_js = ['//cdn.ckeditor.com/4.6.0/standard/ckeditor.js']
    form_columns = ["name", "sender", "recipient", "cc", "subject", "message"]
+   form_overrides = {
+      'message': CKTextAreaField
+   }
 
 admin.add_view(ModelView(User, db.session))
 admin.add_view(Eventview(Event, db.session))
