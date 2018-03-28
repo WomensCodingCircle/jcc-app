@@ -2,6 +2,7 @@ from flask import render_template, request, session, redirect, url_for, flash
 from mixer.backend.flask import mixer
 from app import app
 from app.models import *
+from app.forms import EmailForm
 
 @app.route('/generate')
 def generate():
@@ -63,11 +64,20 @@ def logout():
 
 @app.route('/mail/')
 def generate_email_default():
-  return render_template("email.html", tTitle = 'Sample email template')
+  form = EmailForm()
+  return render_template("email.html", form=form, tTemplate=None, tTitle = 'Sample email template')
 
 @app.route('/mail/event/<event_id>/template/<template_id>')
 def generate_email(event_id, template_id):
   event = Event.query.filter_by(id=event_id)
   myTemplate = EmailTemplate.query.filter_by(id=template_id).first()
+  defaultData = {
+    'from': myTemplate.sender,
+    'to': myTemplate.recipient,
+    'cc': myTemplate.cc,
+    'subject': myTemplate.subject,
+    'message': myTemplate.message
+  }
+  form = EmailForm(defaultData)
   # TODO: Query for the event with given event_id and for the template and generate email message and values for From, To, CC field
-  return render_template("email.html", tTemplate=myTemplate)
+  return render_template("email.html", tTemplate=myTemplate, form=form)

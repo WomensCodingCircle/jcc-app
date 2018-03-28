@@ -1,45 +1,18 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}JCC App{% endblock %}
+{% from "_formhelpers.html" import render_field %}
+{% extends "base.html" %}
 
 {% block content %}
    <div class="container">
       {% include "heading.html" %}
+      {{ ckeditor.config(name='messageField', custom_config="default: test") }}
       <div class="row">
          <h3>{{ tTemplate.name }}</h3>
       </div>
       <br />
       <div class="col-lg-12">
-         <div class="row">
-            <form class="form-group">
-               <label>From</label>
-               <input type="text" class="form-control" value="{{ tTemplate.sender }}" />
-            </form>
-         </div>
-         <div class="row">
-            <form class="form-group">
-               <label>To</label>
-               <input type="text" class="form-control" value="{{ tTemplate.recipient }}" />
-            </form>
-         </div>
-         <div class="row">
-            <form class="form-group">
-               <label>CC</label>
-               <input type="text" class="form-control" value="{{ tTemplate.cc }}" />
-            </form>
-         </div>
-         <div class="row">
-            <form class="form-group">
-               <label>Subject</label>
-               <input type="text" class="form-control" value="{{ tTemplate.subject }} "/>
-            </form>
-         </div>
-         <br /><br />
-         <div class="row">
-            <form class="form-group">
-               <label>Message</label>
-               <input type="text" class="form-control"  style="height: 20em;" value="{{ tTemplate.message }}" />
-            </form>
-         </div>
+        {% for field in form %}
+          {{ render_field(field) }}
+        {% endfor %}
       </div>
       <div class="row" style="text-align: right;">
          <button type="button" class="btn btn-info" style="margin-top: 1.8em;"

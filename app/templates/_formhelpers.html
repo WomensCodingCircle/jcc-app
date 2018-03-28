@@ -1,0 +1,13 @@
+{% macro render_field(field) %}
+  <div class="input-group jcc-field">
+    <div class="input-group">
+      {%  if field.type == "TextAreaField" %}
+        <div>{{ field.label(class_="jcc-label") }}</div>
+        <div>{{ field(class_="form-control jcc-input-text") }}</div>
+      {% else %}
+        <div>{{ field.label(class_="jcc-label") }}</div>
+        <div>{{ field(class_="form-control jcc-input-text") }}</div>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}
